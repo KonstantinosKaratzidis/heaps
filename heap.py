@@ -7,6 +7,9 @@ from math import ceil
 class IndexOutOfRangeError(BaseException):
 	pass
 
+class InvalidElement(BaseException):
+	pass
+
 class EmptyHeapError(BaseException):
 	pass
 
@@ -28,7 +31,9 @@ class _Heap:
 
 	def insert(self, element):
 		"""Inserts an element to the heap and puts it in
-		it's appropriate position."""
+		it's appropriate position. The element cannot be None"""
+		if element is None:
+			raise InvalidElement
 		self.heap_array.append(element)
 		self.size += 1
 		self._heapify_up(self.size - 1)
